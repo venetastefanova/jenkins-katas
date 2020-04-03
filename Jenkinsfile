@@ -20,6 +20,7 @@ pipeline {
             sh '''#! /bin/bash
 gradle clean shadowjar -p app
 '''
+            archiveArtifacts 'app/build/libs/'
           }
         }
 
