@@ -1,8 +1,5 @@
 pipeline {
   agent any
-  environment {
-    DOCKERCREDS = credentials('docker_login') //use the credentials just created in this stage
-  }
   stages {
     stage('Clone down') {
       steps {
@@ -54,6 +51,9 @@ pipeline {
       }
     }
     stage('push docker app'){
+      environment {
+        DOCKERCREDS = credentials('docker_login') //use the credentials just created in this stage
+      }
       steps {
         unstash 'code' //unstash the repository code
         sh 'ci/build-docker.sh'
